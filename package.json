@@ -1,0 +1,12 @@
+{
+  "name": "kirby-docker",
+  "version": "1.0.0",
+  "author": "cowglow <cowglow@gmail.com>",
+  "scripts": {
+    "start": "docker run --name kirby -p 8080:80 docker-starterkit",
+    "dev": "docker exec -it kirby /bin/bash"
+  },
+  "license": "MIT",
+  "description": "Dockerized Kirby CMS",
+  "private": true
+}
