@@ -1,7 +1,7 @@
 # Use offical ubuntu:20.04 image
 FROM ubuntu:20.04
 
-# Set timezone environment variable
+# Set timezone
 ENV TZ=Europe/Berlin
 
 # Set geographic area using above variable
@@ -11,12 +11,11 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # Remove annoying messages during package installation
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Install packages: web server Apache, PHP and extensions
-RUN apt-get update && apt-get install --no-install-recommends -y \
+# Install packages: web server & PHP plus extensions
+RUN apt-get update && apt-get install -y \
   apache2 \
   apache2-utils \
   ca-certificates \
-  git \
   php \
   libapache2-mod-php \
   php-curl \
@@ -35,14 +34,12 @@ COPY default.conf /etc/apache2/sites-available/000-default.conf
 # Remove default content (existing index.html)
 RUN rm /var/www/html/*
 
-# Clone the Kirby Starterkit
-RUN git clone --depth 1 https://github.com/getkirby/starterkit.git /var/www/html
-
-# Fix files and directories ownership
-RUN chown -R www-data:www-data /var/www/html/
-
 # Activate Apache modules headers & rewrite
 RUN a2enmod headers rewrite
+
+# Change web server's user id to match local user, replace with your local user id
+COPY entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["entrypoint.sh"]
 
 # Tell container to listen to port 80 at runtime
 EXPOSE 80

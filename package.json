@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "cowglow <cowglow@gmail.com>",
   "scripts": {
-    "start": "docker run --name kirby -p 8080:80 docker-starterkit",
+    "start": "docker run -d --name kirby -p 8080:80 --mount type=bind,source=$(pwd)/starterkit,destination=/var/www/html docker-starterkit",
     "dev": "docker exec -it kirby /bin/bash",
     "build": "docker build -t docker-starterkit ."
   },
