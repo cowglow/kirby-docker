@@ -1,5 +1,5 @@
-# Use offical ubuntu:20.04 image
-FROM ubuntu:20.04
+# Use latest offical ubuntu image
+FROM ubuntu:latest
 
 # Set timezone
 ENV TZ=Europe/Berlin
@@ -38,8 +38,7 @@ RUN rm /var/www/html/*
 RUN a2enmod headers rewrite
 
 # Change web server's user id to match local user, replace with your local user id
-COPY entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["entrypoint.sh"]
+RUN usermod --uid 1001 www-data
 
 # Tell container to listen to port 80 at runtime
 EXPOSE 80

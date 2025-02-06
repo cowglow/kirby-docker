@@ -1,0 +1,12 @@
+version: '3'
+services:
+  webserver:
+    build: .
+    image: docker-starterkit
+    container_name: webserver
+    ports:
+      - "8080:80"
+    volumes:
+      - ./starterkit:/var/www/html/
+    env_file:
+      - ./id.env
