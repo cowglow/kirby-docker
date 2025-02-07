@@ -31,12 +31,19 @@ jobs:
       - name: Run the build script
         run: php ./generate-static-site.php
 
-      - name: Commit files
-        run: |
-          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
-          git config --local user.name ${{ github.actor }}
-          if [ -n "$(git status --porcelain)" ]; then
-            git commit -a -m "Generated Static Version"
-          else
-            echo "No changes to commit"
-          fi
+#      - name: Commit files
+#        run: |
+#          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+#          git config --local user.name ${{ github.actor }}
+#          if [ -n "$(git status --porcelain)" ]; then
+#            git commit -a -m "Generated Static Version"
+#          else
+#            echo "No changes to commit"
+#          fi
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - name: Deploy 🚀
+        id: deployment
+        uses: actions/deploy-pages@v4
