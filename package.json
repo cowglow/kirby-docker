@@ -4,7 +4,7 @@
   "author": "cowglow <cowglow@gmail.com>",
   "scripts": {
     "start": "docker compose up -d",
-    "dev": "docker container exec -it webserver /bin/bash",
+    "dev": "docker compose up -d && docker container exec -it webserver /bin/bash",
     "build": "docker compose build"
   },
   "license": "MIT",
