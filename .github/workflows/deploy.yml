@@ -25,14 +25,11 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Set Repo Data
-        run: |
-          echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
-          echo "REPO_NAME_EVENT=$(basename ${{ github.repository }})" >> $GITHUB_ENV
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Run the build script
-        run: |
-          php ./generate-static-site.php
+        run: php ./generate-static-site.php
 
       - name: Commit files
         run: |
