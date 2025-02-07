@@ -29,17 +29,19 @@ jobs:
         run: |
           echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
           echo "REPO_NAME_EVENT=$(basename ${{ github.repository }})" >> $GITHUB_ENV
+
       - name: Run the build script
         run: |
           php ./build/index.php ${{ env.REPO_NAME }}
-      - name: Configure Page
-        uses: actions/configure-pages@v4
 
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: build
+      - name: Commit files
+        run: |
+          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --local user.name ${{ github.actor }}
+          git commit -a -m "Generated Static Version"
+
       - name: Deploy 🚀
-        id: deployment
-        uses: actions/deploy-pages@v4
-
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
