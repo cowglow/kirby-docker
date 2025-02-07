@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "author": "cowglow <cowglow@gmail.com>",
   "scripts": {
-    "start": "docker-compose up -d",
-    "dev": "docker-compose exec web /bin/bash",
-    "build": "docker-compose build"
+    "start": "docker compose up -d",
+    "dev": "docker container exec -it webserver /bin/bash",
+    "build": "docker compose build"
   },
   "license": "MIT",
   "description": "Dockerized Kirby CMS",
