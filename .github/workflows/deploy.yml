@@ -32,7 +32,7 @@ jobs:
 
       - name: Run the build script
         run: |
-          php ./build/index.php ${{ env.REPO_NAME }}
+          php ./generate-static-site.php
 
       - name: Commit files
         run: |
