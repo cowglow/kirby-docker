@@ -35,7 +35,11 @@ jobs:
         run: |
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
           git config --local user.name ${{ github.actor }}
-          git commit -a -m "Generated Static Version"
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -a -m "Generated Static Version"
+          else
+            echo "No changes to commit"
+          fi
 
       - name: Deploy 🚀
         uses: ad-m/github-push-action@master
