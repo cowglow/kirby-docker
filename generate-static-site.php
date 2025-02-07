@@ -16,7 +16,7 @@ $kirby = kirby();
 $site = $kirby->site();
 
 // todo: fix for domains other than user.github.io, eg. custom CNAME
-$dir = '/kirby-docker';
+$dir = 'kirby-docker';
 if(!empty($argv[1])) {
 	$dir = $argv[1];
 }
