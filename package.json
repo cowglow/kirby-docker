@@ -4,8 +4,11 @@
   "author": "cowglow <cowglow@gmail.com>",
   "scripts": {
     "start": "docker compose up -d",
-    "dev": "docker compose up -d && docker container exec -it webserver /bin/bash",
-    "build": "docker compose build"
+    "dev": "docker compose up -d && docker container exec -w /var/www/html/ -it webserver /bin/bash",
+    "terminal": "docker container exec -w /var/www/html/ -it webserver /bin/bash",
+    "build": "docker compose build",
+    "generate": "docker container exec -w /var/www/html/ -it webserver php generate-static-site.php",
+    "serve": "docker container exec -w /var/www/html/dist -it webserver php -S 0.0.0.0:9000"
   },
   "license": "MIT",
   "description": "Dockerized Kirby CMS",

@@ -52,5 +52,7 @@ Icon
 /site/config/config.starterkit.test.php
 
 # Compose
-/starterkit/composer.lock
-/starterkit/composer.phar
+composer.lock
+composer.phar
+/dist
+/vendor
