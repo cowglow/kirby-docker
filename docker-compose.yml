@@ -2,11 +2,11 @@ version: '3'
 services:
   webserver:
     build: .
-    image: docker-starterkit
+    image: kirby-docker
     container_name: webserver
     ports:
       - "8080:80"
     volumes:
-      - ./starterkit:/var/www/html/
+      - ./kirby:/var/www/html/
     env_file:
       - ./id.env
